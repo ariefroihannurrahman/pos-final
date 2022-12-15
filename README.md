@@ -1,4 +1,4 @@
-# Web Application Development course
+# Web Application Development Course
 
 This project was created by group 2.
 
