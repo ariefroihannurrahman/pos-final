@@ -1,6 +1,6 @@
 # Website P.O.S
 
-This project was done by group 2.
+This project was created by group 2.
 
 ## Group 2
 
