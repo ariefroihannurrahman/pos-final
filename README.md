@@ -1,8 +1,8 @@
-# Website P.O.S
+# Web Application Development course
 
 This project was created by group 2.
 
-## Web Application Development course
+## Website P.O.S
 ### Group 2 
 
 <ul>
