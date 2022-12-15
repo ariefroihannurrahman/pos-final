@@ -2,7 +2,8 @@
 
 This project was created by group 2.
 
-## Group 2
+## Group 2 
+### Web Application Development course
 
 <ul>
     <li>Adi Pratama Putra</li>
