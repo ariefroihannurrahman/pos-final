@@ -30,12 +30,20 @@ const Jenis = () => {
                     <Title name={'Jenis'} />
                     <div className="row mb-3">
                         <div className="col p-5 bg-white rounded shadow">
+                            <div className="row text-content">
+                                <div className="col-6">
+                                    <h3>Detail Jenis</h3>
+                                </div>
+                                <div className="col-6 text-end">
+                                    <a className="btn btn-info cl-white mb-3" href="jenis/t">Tambah Jenis</a>
+                                </div>
+                            </div>
                             <table className="table text-center">
                                 <thead>
                                     <tr>
                                         <th scope="col">Kode Jenis</th>
                                         <th scope="col">Jenis</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

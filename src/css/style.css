@@ -23,6 +23,10 @@ body {
     color: white !important;
 }
 
+.cl-white {
+    color: white !important;
+}
+
 button.bg-dsb:hover {
     background-color: rgb(0, 158, 211) !important;
 }

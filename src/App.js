@@ -5,12 +5,16 @@ import Home from "./pages/Home";
 import Penjualan from "./pages/subpage/manager/Penjualan";
 import Produk from "./pages/subpage/manager/Produk";
 import EditProduk from "./pages/subpage/manager/edit/EditProduk";
+import TambahProduk from "./pages/subpage/manager/tambah/TambahProduk";
 import Kategori from "./pages/subpage/manager/Kategori";
 import EditKategori from "./pages/subpage/manager/edit/EditKategori";
+import TambahKategori from "./pages/subpage/manager/tambah/TambahKategori";
 import Jenis from "./pages/subpage/manager/Jenis";
 import EditJenis from "./pages/subpage/manager/edit/EditJenis";
+import TambahJenis from "./pages/subpage/manager/tambah/TambahJenis";
 import Karyawan from "./pages/subpage/manager/Karyawan";
 import EditKaryawan from "./pages/subpage/manager/edit/EditKaryawan";
+import TambahKaryawan from "./pages/subpage/manager/tambah/TambahKaryawan";
 import './css/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -46,32 +50,39 @@ const App = () => {
             
             {/* Route ke halaman manager sesuai repository */}
             <Route path="mngr/" element={<Manager />} />
+
+            {/* Route ke halaman dashboard */}
             <Route path="mngr/dashboard" element={<Manager />} />
+
+            {/* Route ke halaman penjualan */}
             <Route path="mngr/penjualan" element={<Penjualan />} />
             
-            {/* Route ke halaman kategori */}
+            {/* Route ke halaman produk */}
             <Route path="mngr/produk">
               <Route index element={<Produk />} />
               <Route path="e" element={<EditProduk />} />
+              <Route path="t" element={<TambahProduk />} />
             </Route>
 
             {/* Route ke halaman kategori */}
             <Route path="mngr/kategori">
               <Route index element={<Kategori />} />
               <Route path="e" element={<EditKategori />} />
+              <Route path="t" element={<TambahKategori />} />
             </Route>
             
             {/* Route ke halaman jenis */}
             <Route path="mngr/jenis/">
               <Route index element={<Jenis />}/>
               <Route path="e" element={<EditJenis />} />
+              <Route path="t" element={<TambahJenis />} />
             </Route>
-            
-            <Route path="mngr/karyawan" element={<Karyawan />} />
-            
+          
+            {/* Route ke halaman karyawan */}
             <Route path="mngr/karyawan/">
               <Route index element={<Karyawan />}/>
               <Route path="e" element={<EditKaryawan />} />
+              <Route path="t" element={<TambahKaryawan />} />
             </Route>
 
           </Route>

@@ -30,12 +30,20 @@ const Produk = () => {
                     <Title name={'Produk'} />
                     <div className="row mb-3">
                         <div className="col p-5 bg-white rounded shadow">
+                            <div className="row text-content">
+                                <div className="col-6">
+                                    <h3>Detail Produk</h3>
+                                </div>
+                                <div className="col-6 text-end">
+                                    <a className="btn btn-info cl-white mb-3" href="produk/t">Tambah Produk</a>
+                                </div>
+                            </div>
                             <table className="table text-center">
                                 <thead>
                                     <tr>
                                         <th scope="col">Kode Produk</th>
                                         <th scope="col">Nama Produk</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
