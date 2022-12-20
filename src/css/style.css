@@ -4,6 +4,12 @@ body {
     padding: 0px;
 }
 
+.bg-wp {
+    background-image: url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    color: white;
+}
+
 .row-header {
     height: 12em;
 }
@@ -19,4 +25,15 @@ body {
 
 button.bg-dsb:hover {
     background-color: rgb(0, 158, 211) !important;
+}
+
+.navigation-bar {
+    background-color: white;
+    width: 200px !important;
+    height: 100%;
+}
+
+.active {
+    background-color: deepskyblue !important;
+    cursor: default;
 }
