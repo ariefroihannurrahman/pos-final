@@ -15,6 +15,9 @@ import TambahJenis from "./pages/subpage/manager/tambah/TambahJenis";
 import Karyawan from "./pages/subpage/manager/Karyawan";
 import EditKaryawan from "./pages/subpage/manager/edit/EditKaryawan";
 import TambahKaryawan from "./pages/subpage/manager/tambah/TambahKaryawan";
+import LaporanAwal from "./pages/subpage/kasir/LaporanAwal";
+import LaporanAkhir from "./pages/subpage/kasir/LaporanAkhir";
+import KasirTransaksi from "./pages/subpage/kasir/KasirTransaksi";
 import './css/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -86,6 +89,10 @@ const App = () => {
             </Route>
 
           </Route>
+
+          <Route path='/laporan-awal' element={<LaporanAwal/>}/>
+          <Route path='/laporan-akhir' element={<LaporanAkhir/>}/>
+          <Route path='/kasir-transaksi' element={<KasirTransaksi/>}/>
         </Routes>
       </BrowserRouter>
     </DocumentMeta>
