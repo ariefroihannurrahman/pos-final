@@ -8,13 +8,13 @@ export const LaporanAwal = () => {
     const [nominal, setNominal] = useState();
     const [error, setError] = useState();
 
-    useEffect(() => {
-        if (localStorage.getItem("datalaporan")) {
-          navigate("/kasir-transaksi");
-        }else{
-            navigate("/")
-        }
-      }, []);
+    // useEffect(() => {
+    //     if (localStorage.getItem("datalaporan")) {
+    //       navigate("/kasir-transaksi");
+    //     }else{
+    //         navigate("/")
+    //     }
+    //   }, []);
     
     const getDataKasir = async () => {
         try {

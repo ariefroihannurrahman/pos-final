@@ -10,13 +10,13 @@ export const LaporanAkhir = () => {
     const [nominal, setNominal] = useState();
     const [error, setError] = useState();
 
-    useEffect(() => {
-        if (localStorage.getItem("datalaporan")) {
-          console.log("ok")
-        }else{
-            navigate("/")
-        }
-      }, []);
+    // useEffect(() => {
+    //     if (localStorage.getItem("datalaporan")) {
+    //       console.log("ok")
+    //     }else{
+    //         navigate("/")
+    //     }
+    //   }, []);
     
     const getDataKasir = async () => {
         try {

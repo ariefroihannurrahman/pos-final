@@ -45,6 +45,12 @@ const App = () => {
           {/* Route ke home untuk awalan */}
           <Route path="/" element={<Home />} />
 
+          {/* Route Kasir */}
+          <Route path='/laporan-awal' element={<LaporanAwal/>}/>
+          <Route path='/kasir-transaksi' element={<KasirTransaksi/>}/>
+          <Route path='/laporan-akhir' element={<LaporanAkhir/>}/>
+          
+
           {/* Route ke repository */}
           <Route path="/pos-final/">
 
@@ -90,9 +96,6 @@ const App = () => {
 
           </Route>
 
-          <Route path='/laporan-awal' element={<LaporanAwal/>}/>
-          <Route path='/laporan-akhir' element={<LaporanAkhir/>}/>
-          <Route path='/kasir-transaksi' element={<KasirTransaksi/>}/>
         </Routes>
       </BrowserRouter>
     </DocumentMeta>
