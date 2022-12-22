@@ -9,34 +9,35 @@ export const Home = () => {
     // const [radioValue, setRadioValue] = useState('');
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (localStorage.getItem("datakasir")) {
-    //       navigate("/kasir-transaksi");
-    //     }
-    //   }, []);
+    useEffect(() => {
+        if (localStorage.getItem("datakasir")) {
+          navigate("/kasir-transaksi");
+        }
+      }, []);
 
     const LoginKasir = async (e) => {
-        try{
-            e.preventDefault();
-            const res = await axios.post('http://localhost:5000/auth',{
-                kode : kode
-            });
-            const dataLogin = {
-                idsession : res.data.sessionid,
-                idkasir : res.data.idkasir,
-                namakasir : res.data.namakasir
-            };
+        e.preventDefault();
+        
+        const res = await axios.post('http://localhost:5000/auth', {
+            kode: kode
+        });
 
-            await localStorage.setItem("datakasir", JSON.stringify(dataLogin));
+        if (res.data.login == true) {
+            const dataLogin = {
+                idsession: res.data.sessionid,
+                idkasir: res.data.idkasir,
+                namakasir: res.data.namakasir
+            };
+            localStorage.setItem("datakasir", JSON.stringify(dataLogin));
             navigate("/laporan-awal")
-        }catch (error) {
-            setError(error.response.data.message);
-            alert("Kode Salah")
+        } else {
+            alert("Token Salah")
+            setKode('');
         }
     }
 
 
-    return(
+    return (
         <div className="login-pages">
             <Helmet>
                 <title>Login | P.O.S</title>
@@ -45,26 +46,12 @@ export const Home = () => {
                 <div className="row-header"></div>
                 <div className="row row-login">
                     <div className="col-lg-4 login-column offset-4 p-5 border rounded bg-white">
-                        <form onClick={LoginKasir}>
+                        <form onSubmit={LoginKasir}>
                             <div class="form-group mb-2">
                                 <label className="login-label mb-2" for="token-id">Token</label>
-                                <input type="password" className="form-control" id="token-id" placeholder="Masukkan Token" value={kode} onChange={(e) => setKode(e.target.value)}/>
+                                <input type="password" className="form-control" id="token-id" placeholder="Masukkan Token" value={kode} onChange={(e) => setKode(e.target.value)} required/>
                             </div>
-                            <div className="form-check p-0 mb-4">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="as" id="kasir-option-id" value="kasir"/>
-                                    <label className="form-check-label" for="kasir-option-id">Kasir</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="as" id="manager-option-id" value="manager"/>
-                                    <label className="form-check-label" for="manager-option-id">Manager</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="as" id="owner-option-id" value="owner"/>
-                                    <label className="form-check-label" for="owner-option-id">Owner</label>
-                                </div>
-                            </div>
-                            <button type="submit" className="btn col-12 bg-dsb" >Submit</button>
+                            <button type="submit" className="btn col-12 bg-dsb mt-3" >Submit</button>
                         </form>
                     </div>
                 </div>

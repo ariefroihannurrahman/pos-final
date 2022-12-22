@@ -6,7 +6,6 @@ export const LaporanAwal = () => {
     const navigate = useNavigate();
     const [dataKasir, setDataKasir] = useState([]);
     const [nominal, setNominal] = useState();
-    const [error, setError] = useState();
 
     // useEffect(() => {
     //     if (localStorage.getItem("datalaporan")) {
@@ -15,40 +14,35 @@ export const LaporanAwal = () => {
     //         navigate("/")
     //     }
     //   }, []);
-    
+
     const getDataKasir = async () => {
         try {
-          const data = await localStorage.getItem("datakasir");
-          await setDataKasir(JSON.parse(data));
-        } catch (error) {}
+            const data = localStorage.getItem("datakasir");
+            setDataKasir(JSON.parse(data));
+        } catch (error) { }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getDataKasir();
     }, []);
 
     const SaveLaporanAwal = async (e) => {
-        try{
-            e.preventDefault();
-            const res = await axios.post('http://localhost:5000/add-laporan-awal',{
-                id_session : dataKasir.idsession,
-                no_karyawan : dataKasir.idkasir,
-                laporan_awal : nominal
-            });
-            const dataLaporan = {
-                laporanawal : res.data.laporanawal
-            };
+        e.preventDefault();
+        const res = await axios.post('http://localhost:5000/add-laporan-awal', {
+            id_session: dataKasir.idsession,
+            no_karyawan: dataKasir.idkasir,
+            laporan_awal: nominal
+        });
+        const dataLaporan = {
+            laporanawal: res.data.laporanawal
+        };
 
-            await localStorage.setItem("datalaporan", JSON.stringify(dataLaporan));
-            navigate("/kasir-transaksi")
-        }catch (error) {
-            setError(error.response.data.message);
-            alert("Kode Salah")
-        }
+        localStorage.setItem("datalaporan", JSON.stringify(dataLaporan));
+        navigate("/kasir-transaksi")
     }
 
 
-    return(
+    return (
         <div className="container">
             <p>{dataKasir.namakasir}</p>
             <form onSubmit={SaveLaporanAwal}>
@@ -56,7 +50,7 @@ export const LaporanAwal = () => {
                     <div className="col-4 offset-4 mt-150px">
                         <div className="form-outline mb-4">
                             <label className="form-label" for="laporan_awal">Masukkan Nominal Laporan Awal</label>
-                            <input type="text" id="laporan-awal" className="form-control" value={nominal} onChange={(e) => setNominal(e.target.value)}/>
+                            <input type="text" id="laporan-awal" className="form-control" value={nominal} onChange={(e) => setNominal(e.target.value)} required />
                         </div>
                         <input type="submit" value="Submit" className="btn btn-primary btn-block mb-4"></input>
                     </div>
