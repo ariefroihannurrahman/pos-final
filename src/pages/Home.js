@@ -4,20 +4,18 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-    const [error, setError] = useState('');
     const [kode, setKode] = useState('');
-    // const [radioValue, setRadioValue] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         if (localStorage.getItem("datakasir")) {
-          navigate("/kasir-transaksi");
+            navigate("/kasir-transaksi");
         }
-      }, []);
+    }, []);
 
     const LoginKasir = async (e) => {
         e.preventDefault();
-        
+
         const res = await axios.post('http://localhost:5000/auth', {
             kode: kode
         });
@@ -49,7 +47,7 @@ export const Home = () => {
                         <form onSubmit={LoginKasir}>
                             <div class="form-group mb-2">
                                 <label className="login-label mb-2" for="token-id">Token</label>
-                                <input type="password" className="form-control" id="token-id" placeholder="Masukkan Token" value={kode} onChange={(e) => setKode(e.target.value)} required/>
+                                <input type="password" className="form-control" id="token-id" placeholder="Masukkan Token" value={kode} onChange={(e) => setKode(e.target.value)} required />
                             </div>
                             <button type="submit" className="btn col-12 bg-dsb mt-3" >Submit</button>
                         </form>

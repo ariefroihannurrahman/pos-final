@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export const KasirUtama = () => {
 
     const navigate = useNavigate();
-    const [error, setError] = useState('');
     const [dataKasir, setDataKasir] = useState([]);
     const [kode, setKode] = useState('');
     const [items, setItems] = useState([]);
+    const [itemList, setItemList] = useState([]);
     const [namaBarang, setNamaBarang] = useState('');
     const [hargaBarang, setHargaBarang] = useState();
     const [noBarang, setNoBarang] = useState();
@@ -18,6 +20,10 @@ export const KasirUtama = () => {
     const [total, setTotal] = useState(0);
     const [bayar, setBayar] = useState(0);
     const [kembalian, setKembalian] = useState(0);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     var dt = new Date();
     var toDate = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDate();
@@ -29,20 +35,37 @@ export const KasirUtama = () => {
         setDataKasir(JSON.parse(data));
     };
 
+    const GetAllProduk = async (e) => {
+        const res = await axios.get('http://localhost:5000/get-all-item')
+        setItemList(res.data)
+        console.log(res.data)
+    }
+
+    const GetKode = (e) => {
+        setKode(e.target.value);
+        setShow(false);
+        GetProdukKode();
+    };
+
     useEffect(() => {
         getDataKasir();
+        GetAllProduk();
         setIdTransaksi(idDate);
     }, []);
 
 
     const GetProdukKode = async (e) => {
         e.preventDefault();
-        const res = await axios.post('http://localhost:5000/get-produk-kode', {
-            kode: kode
-        });
-        setNoBarang(res.data.no_produk);
-        setNamaBarang(res.data.nama_produk);
-        setHargaBarang(res.data.harga);
+        if (kode.trim().length <= 0) {
+            alert("Masukkan Kode Produk")
+        } else {
+            const res = await axios.post('http://localhost:5000/get-produk-kode', {
+                kode: kode
+            });
+            setNoBarang(res.data.no_produk);
+            setNamaBarang(res.data.nama_produk);
+            setHargaBarang(res.data.harga);
+        }
     }
 
     const SaveItem = async (e) => {
@@ -98,6 +121,7 @@ export const KasirUtama = () => {
         }
     }
 
+
     return (
         <div className="container">
             <div className="row mb-5">
@@ -146,7 +170,7 @@ export const KasirUtama = () => {
                         <input type="text" className="form-control" id="kembalian" value={kembalian} disabled />
                     </div>
                     <div className="button-groups mt-5 text-center">
-                        {/* <button type="button" className="btn btn-primary mr-3" id="cari-barang" data-toggle="modal" data-target="#cariModal">Cari Produk</button> */}
+                        <button type="button" className="btn btn-primary mr-3" onClick={handleShow}>Cari Produk</button>
                         <button type="button" id="tambah-produk" className="btn btn-primary" onClick={SaveItem}>Tambah Produk</button>
                     </div>
                 </div>
@@ -183,10 +207,52 @@ export const KasirUtama = () => {
             </div>
             <div className="row">
                 <div className="col mt-5">
-                    <a href='/laporan-akhir' className="btn btn-primary float-start">Logout</a>
+                    <a href='/laporan-akhir' className="btn btn-primary float-start" >Logout</a>
                     <button type="button" id="selesai-transaksi" className="btn btn-primary float-end" onClick={SaveTransaksi}>Selesai</button>
                 </div>
             </div>
+
+            <Modal show={show} onHide={handleClose} animation={true} fullscreen={true} >
+                <Modal.Header closeButton>
+                    <Modal.Title>Cari Barang</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='container'>
+                        <div className="row">
+                            <div className="col mt-5 mb-5">
+                                <table className="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Kode Barang</th>
+                                            <th scope="col">Nama Barang</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Jenis</th>
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {itemList.map((Item, index) => {
+                                            return (
+                                                <tr key={Item.no_produk}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{Item.kd_produk}</td>
+                                                    <td>{Item.nama_produk}</td>
+                                                    <td>{Item.harga}</td>
+                                                    <td>{Item.nama_jenis}</td>
+                                                    <td>{Item.nama_kategori}</td>
+                                                    <td><button type="button" class="btn btn-info" value={Item.kd_produk} onClick={GetKode}>Get Item</button></td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
 
     )
