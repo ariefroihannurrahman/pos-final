@@ -15,9 +15,13 @@ import TambahJenis from "./pages/subpage/manager/tambah/TambahJenis";
 import Karyawan from "./pages/subpage/manager/Karyawan";
 import EditKaryawan from "./pages/subpage/manager/edit/EditKaryawan";
 import TambahKaryawan from "./pages/subpage/manager/tambah/TambahKaryawan";
+import LaporanAwal from "./pages/subpage/kasir/LaporanAwal";
+import LaporanAkhir from "./pages/subpage/kasir/LaporanAkhir";
+import KasirTransaksi from "./pages/subpage/kasir/KasirTransaksi";
 import './css/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const meta = {
@@ -41,6 +45,12 @@ const App = () => {
         <Routes>
           {/* Route ke home untuk awalan */}
           <Route path="/" element={<Home />} />
+
+          {/* Route Kasir */}
+          <Route path='/laporan-awal' element={<LaporanAwal/>}/>
+          <Route path='/kasir-transaksi' element={<KasirTransaksi/>}/>
+          <Route path='/laporan-akhir' element={<LaporanAkhir/>}/>
+          
 
           {/* Route ke repository */}
           <Route path="/pos-final/">
@@ -86,6 +96,7 @@ const App = () => {
             </Route>
 
           </Route>
+
         </Routes>
       </BrowserRouter>
     </DocumentMeta>
