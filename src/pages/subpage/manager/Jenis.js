@@ -1,9 +1,45 @@
+import React, {useEffect, useState} from "react";
 import DocumentMeta from "react-document-meta";
+import axios from "axios";
 import {Helmet} from "react-helmet";
 import NavigationBar from "../../../components/NavigationBar";
 import Title from "../../../components/Title";
 
 const Jenis = () => {
+    const serverHost = 'http://localhost:5000/';
+    const [dataJenis, setDataJenis] = useState();
+    
+    useEffect(() => {
+        axios.get(serverHost + 'API/jenis')
+        .then(
+            res => {
+                console.log(res.data);
+                setDataJenis(res.data);
+            })
+        .catch(
+            error => {
+                console.log(error);
+            }
+        )
+    }, []);
+    
+    const deleteJenis = (no_jenis) =>{
+        console.log(no_jenis);
+        axios
+            .delete(serverHost + `API/delete/jenis/${no_jenis}`)
+            .then(
+                res => {
+                    console.log(res);
+                    window.location.reload();
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error);
+                }
+            )
+    }
+
     const meta = {
         title: 'P.O.S',
         description: 'Halaman Manager | Jenis Produk',
@@ -41,20 +77,27 @@ const Jenis = () => {
                             <table className="table text-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Kode Jenis</th>
-                                        <th scope="col">Jenis</th>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Nama Jenis</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>097</td>
-                                        <td>Makanan</td>
-                                        <td>
-                                            <a className="btn btn-primary" href={`jenis/e`}>Edit</a>
-                                            <a className="btn btn-danger" href={"/"}>Delete</a>
-                                        </td>
-                                    </tr>
+                                    {dataJenis && dataJenis.map((jenis, index)=>{
+                                        return(
+                                            <tr key={index}>
+                                                <td>
+                                                    {index+1}
+                                                </td>
+
+                                                <td>{jenis.nama_jenis}</td>
+                                                <td>
+                                                    <a className="btn btn-primary" href={`jenis/e/${jenis.no_jenis}`}>Edit</a>
+                                                    <button onClick={()=>{deleteJenis(jenis.no_jenis)}} className="btn btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>

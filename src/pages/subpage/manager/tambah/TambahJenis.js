@@ -1,11 +1,39 @@
+import axios from "axios";
+import React, { useState } from 'react';
 import DocumentMeta from "react-document-meta";
 import {Helmet} from "react-helmet";
+import { useNavigate } from "react-router-dom";
 import NavigationBar from "../../../../components/NavigationBar";
 import Title from "../../../../components/Title";
 
-const TambahJenis = () => {
+const EditJenis = () => {
+    const serverHost = 'http://localhost:5000/';
+    const [namaJenis, setNamaJenis] = useState();
+    const navigate = useNavigate();
+
+    const postData = (e) => {
+        if((namaJenis !== undefined) && isNaN(namaJenis)){
+            e.preventDefault();
+            axios
+                .post(serverHost + 'API/tambah/jenis', {
+                    nama_jenis:namaJenis.charAt(0).toUpperCase() + namaJenis.slice(1)
+                })
+                .then(
+                    response => {
+                        navigate('/pos-final/mngr/jenis');
+                    }
+                )
+                .catch(
+                    error => {
+                        console.log(error);
+                    }
+                )
+        }
+        // navigate('/pos-final/mngr/jenis');
+    }
+
     const meta = {
-        title: 'Tambah Jenis | P.O.S',
+        title: 'Edit Jenis | P.O.S',
         description: 'Halaman Manager | Tambah Jenis Produk',
         meta: {
           charset: 'utf-8',
@@ -27,28 +55,18 @@ const TambahJenis = () => {
             <div className="d-flex flex-row">
                 <NavigationBar />
                 <div className="container m-3">
-                    <Title name={'Tambah Jenis'} />
+                    <Title name={'Edit Jenis'} />
                     <div className="row mb-3">
                         <div className="col p-5 bg-white rounded shadow">
-                            <form class="needs-validation" novalidate>
-                                <div class="row form-row mb-3">
-                                    <div class="col-6 mb-3">
-                                        <label className="mb-2" for="kode_jenis">Kode Jenis</label>
-                                        <input type="text" class="form-control" id="kode_jenis" placeholder="Kode Jenis" required/>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <label className="mb-2" for="nama_jenis">Jenis</label>
-                                        <input type="text" class="form-control" id="nama_jenis" placeholder="Jenis" required/>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
+                            <form onSubmit={(e)=>{postData(e)}} className="needs-validation" noValidate>
+                                <div className="row form-row mb-3">
+                                    <div className="col-6 mb-3">
+                                        <label className="mb-2" htmlFor="nama_jenis">Nama Jenis</label>
+                                        <input type="text" className="form-control" id="nama_jenis" onChange={(e)=>{setNamaJenis(e.target.value)}} placeholder="Jenis" required/>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" type="submit">Edit</button>
-                                <a href="/pos-final/mngr/jenis" class="btn btn-danger">Kembali</a>
+                                <button type="submit" className="btn btn-primary">Tambah</button>
+                                <a href="/pos-final/mngr/jenis" className="btn btn-danger">Kembali</a>
                             </form>
                         </div>
                     </div>
@@ -58,4 +76,4 @@ const TambahJenis = () => {
     );
 }
 
-export default TambahJenis;
+export default EditJenis;

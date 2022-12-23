@@ -60,28 +60,28 @@ const App = () => {
             {/* Route ke halaman produk */}
             <Route path="mngr/produk">
               <Route index element={<Produk />} />
-              <Route path="e" element={<EditProduk />} />
+              <Route path="e/:no_produk" element={<EditProduk />} />
               <Route path="t" element={<TambahProduk />} />
             </Route>
 
             {/* Route ke halaman kategori */}
             <Route path="mngr/kategori">
               <Route index element={<Kategori />} />
-              <Route path="e" element={<EditKategori />} />
+              <Route path="e/:no_kategori" element={<EditKategori />} />
               <Route path="t" element={<TambahKategori />} />
             </Route>
             
             {/* Route ke halaman jenis */}
             <Route path="mngr/jenis/">
               <Route index element={<Jenis />}/>
-              <Route path="e" element={<EditJenis />} />
+              <Route path="e/:no_jenis" element={<EditJenis />} />
               <Route path="t" element={<TambahJenis />} />
             </Route>
           
             {/* Route ke halaman karyawan */}
             <Route path="mngr/karyawan/">
               <Route index element={<Karyawan />}/>
-              <Route path="e" element={<EditKaryawan />} />
+              <Route path="e/:no_karyawan" element={<EditKaryawan />} />
               <Route path="t" element={<TambahKaryawan />} />
             </Route>
 
