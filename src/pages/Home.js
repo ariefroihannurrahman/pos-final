@@ -7,11 +7,11 @@ export const Home = () => {
     const [kode, setKode] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (localStorage.getItem("datakasir")) {
-            navigate("/kasir-transaksi");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (localStorage.getItem("datakasir")) {
+    //         navigate("/kasir-transaksi");
+    //     }
+    // }, []);
 
     const LoginKasir = async (e) => {
         e.preventDefault();
@@ -27,7 +27,15 @@ export const Home = () => {
                 namakasir: res.data.namakasir
             };
             localStorage.setItem("datakasir", JSON.stringify(dataLogin));
-            navigate("/laporan-awal")
+            if(res.data.jabatan == "Kasir"){
+                navigate("/laporan-awal")
+            }else if(res.data.jabatan == "Manager"){
+                navigate("/pos-final/mngr/dashboard")
+            }else if(res.data.jabatan == "Owner"){
+                navigate("/pos-final/ownr")
+            }else{
+                console.log(res.data.jabatan)
+            }
         } else {
             alert("Token Salah")
             setKode('');

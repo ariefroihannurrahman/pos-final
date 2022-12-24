@@ -208,7 +208,7 @@ export const KasirUtama = () => {
             <div className="row">
                 <div className="col mt-5">
                     <a href='/laporan-akhir' className="btn btn-primary float-start" >Logout</a>
-                    <button type="button" id="selesai-transaksi" className="btn btn-primary float-end" onClick={SaveTransaksi}>Selesai</button>
+                    <a href='/kasir-transaksi' onClick={SaveTransaksi}><button type="button" id="selesai-transaksi" className="btn btn-primary float-end">Selesai</button></a>
                 </div>
             </div>
 
