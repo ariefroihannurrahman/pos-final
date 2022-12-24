@@ -67,7 +67,7 @@ const Manager = () => {
                 }
             );
         axios
-            .get(serverHost + 'API/penjualan')
+            .get(serverHost + 'API/transaksi')
             .then(
                 response => {
                     console.log(response.data);
@@ -128,7 +128,7 @@ const Manager = () => {
                     <div className="row mb-3">
                         <div className="col p-5 bg-white rounded shadow">
                             <div className="title-content mb-4">
-                                <h2>Detail Penjualan</h2>
+                                <h2>Laporan Penjualan</h2>
                             </div>
                             <table className="table text-center">
                                 <thead>
@@ -137,6 +137,7 @@ const Manager = () => {
                                         <th scope="col">Kode Penjualan</th>
                                         <th scope="col">Nama Karyawan</th>
                                         <th scope="col">Tanggal Penjualan</th>
+                                        <th scope="col">Total Penjualan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,9 +145,10 @@ const Manager = () => {
                                         return(
                                             <tr key={index}>
                                                 <td>{index+1}</td>
-                                                <td>{penjualan.kd_penjualan}</td>
+                                                <td>{penjualan.no_transaksi}</td>
                                                 <td>{dataKaryawan && cekKaryawan(penjualan.no_karyawan)}</td>
                                                 <td>{penjualan.tanggal_penjualan}</td>
+                                                <td>{penjualan.total_transaksi}</td>
                                             </tr>
                                         );
                                     })}

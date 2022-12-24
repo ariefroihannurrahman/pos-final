@@ -1,18 +1,15 @@
-import DocumentMeta from "react-document-meta";
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import {Helmet} from "react-helmet";
-import NavigationBar from "../../../components/NavigationBar";
 import Title from "../../../components/Title";
 
-const Penjualan = () => {
+const Owner = () => {
     const serverHost = "http://localhost:5000/";
     const [dataPenjualan, setDataPenjualan] = useState();
     const [dataKaryawan, setDataKaryawan] = useState();
 
     const cekKaryawan = (params) => {
         for (let i = 0; i < dataKaryawan.length; i++) {
-            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan
+            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan;
         }
     }
 
@@ -30,46 +27,31 @@ const Penjualan = () => {
                     console.log(error);
                 }
             );
-            axios
-                .get(serverHost + 'API/karyawan')
-                .then(
-                    res => {
-                        console.log(res.data);
-                        setDataKaryawan(res.data);
-                    }
-                )
-                .catch(
-                    err => {
-                        console.log(err);
-                    }
-                )
+        axios
+            .get(serverHost + 'API/karyawan')
+            .then(
+                res => {
+                    console.log(res.data);
+                    setDataKaryawan(res.data);
+                }
+            )
+            .catch(
+                err => {
+                    console.log(err);
+                }
+            )
     }, [])
-    
-
-    const meta = {
-        title: 'P.O.S',
-        description: 'Halaman Manager | Penjualan Produk',
-        meta: {
-          charset: 'utf-8',
-          name: {
-            keywords: 'pos, react, meta, document, html, tags, manager',
-            author: 'Arief Roihan Nur Rahman, Adi Pratama Putra, Ayuni Tia Sari',
-            viewport: 'width=device-width, initial-scale=1.0',
-          }
-        }
-    };
 
     return(
-        <DocumentMeta {...meta}>
-            <Helmet>
-                <meta charSet="utf-8" />
-                <title>Manager | P.O.S</title>
-            </Helmet>
-
             <div className="d-flex flex-row">
-                <NavigationBar />
+                <div className="container navigation-bar m-0 p-3 mt-3 shadow">
+                    <h1 className="text-center mb-4" >P.O.S</h1>
+                    <div className="list-group mb-3">
+                        <a href="/pos-final/" className="list-group-item text-center list-group-item-action mt-2 karyawan">Logout</a>
+                    </div>
+                </div>
                 <div className="container m-3">
-                    <Title name={'Laporan Penjualan'} />
+                    <Title name={'Detail Penjualan'} />
                     <div className="row mb-3">
                         <div className="col p-5 bg-white rounded shadow">
                             <table className="table text-center">
@@ -84,12 +66,13 @@ const Penjualan = () => {
                                 </thead>
                                 <tbody>
                                     {dataPenjualan && dataPenjualan.map((penjualan, index)=>{
+                                        const date = new Date(penjualan.tanggal_penjualan)
                                         return(
                                             <tr key={index}>
                                                 <td>{index+1}</td>
                                                 <td>{penjualan.no_transaksi}</td>
-                                                <td>{dataKaryawan && cekKaryawan(penjualan.no_karyawan)}</td>
-                                                <td>{penjualan.tanggal_penjualan}</td>
+                                                <td>{cekKaryawan(penjualan.no_karyawan)}</td>
+                                                <td>{date.toLocaleDateString('id-ID')}</td>
                                                 <td>{penjualan.total_transaksi}</td>
                                             </tr>
                                         );
@@ -100,8 +83,7 @@ const Penjualan = () => {
                     </div>
                 </div>
             </div>
-        </DocumentMeta>
     );
 }
 
-export default Penjualan;
+export default Owner;

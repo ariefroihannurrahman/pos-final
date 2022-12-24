@@ -139,34 +139,34 @@ export const KasirUtama = () => {
                     </form>
                     <form>
                         <div className="form-group">
-                            <label for="nama-produk">Nama Produk</label>
+                            <label htmlFor="nama-produk">Nama Produk</label>
                             <input type="text" className="form-control" id="nama-produk" value={namaBarang} disabled />
                         </div>
                         <div className="form-group">
-                            <label for="harga-produk">Harga (Rp.)</label>
+                            <label htmlFor="harga-produk">Harga (Rp.)</label>
                             <input type="text" className="form-control" id="harga-produk" value={hargaBarang} disabled />
                         </div>
                         <div className="form-group">
-                            <label for="kuantitas-produk">Kuantitas</label>
+                            <label htmlFor="kuantitas-produk">Kuantitas</label>
                             <input type="number" className="form-control" id="kuantitas-produk" value={kuantitasBarang} onChangeCapture={changeKuantitas} />
                         </div>
                         <div className="form-group">
-                            <label for="subtotal">Subtotal (Rp.)</label>
+                            <label htmlFor="subtotal">Subtotal (Rp.)</label>
                             <input className="form-control" value={subtotal} id="subtotal" disabled />
                         </div>
                     </form>
                 </div>
                 <div className="col-6 mt-5">
                     <div className="form-group">
-                        <label for="total">Total (Rp.)</label>
+                        <label htmlFor="total">Total (Rp.)</label>
                         <input type="text" className="form-control" id="total" value={total} disabled />
                     </div>
                     <div className="form-group">
-                        <label for="bayar">Bayar</label>
+                        <label htmlFor="bayar">Bayar</label>
                         <input type="text" className="form-control" id="bayar" value={bayar} onChange={changeBayar} required />
                     </div>
                     <div className="form-group">
-                        <label for="kembalian">Kembalian (Rp.)</label>
+                        <label htmlFor="kembalian">Kembalian (Rp.)</label>
                         <input type="text" className="form-control" id="kembalian" value={kembalian} disabled />
                     </div>
                     <div className="button-groups mt-5 text-center">

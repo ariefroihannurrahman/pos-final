@@ -41,11 +41,11 @@ export const LaporanAkhir = () => {
                 <div className="row">
                     <div className="col-4 offset-4 mt-150px">
                         <div className="form-outline mb-4">
-                            <label className="form-label" for="laporan_awal">Laporan Awal</label>
+                            <label className="form-label" htmlFor="laporan_awal">Laporan Awal</label>
                             <input type="text" id="laporan-awal" value={dataLaporan.laporanawal} className="form-control" />
                         </div>
                         <div className="form-outline mb-4">
-                            <label className="form-label" for="laporan_akhir">Laporan Akhir</label>
+                            <label className="form-label" htmlFor="laporan_akhir">Laporan Akhir</label>
                             <input type="text" id="laporan-akhir" className="form-control" value={nominal} onChange={(e) => setNominal(e.target.value)} required />
                         </div>
                         <input type="submit" value="Submit" className="btn btn-primary btn-block mb-4"></input>

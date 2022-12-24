@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DocumentMeta from "react-document-meta";
 import Manager from "./pages/Manager";
 import Home from "./pages/Home";
+import Owner from "./pages/subpage/owner/Owner";
 import Penjualan from "./pages/subpage/manager/Penjualan";
 import Produk from "./pages/subpage/manager/Produk";
 import EditProduk from "./pages/subpage/manager/edit/EditProduk";
@@ -21,7 +22,6 @@ import KasirTransaksi from "./pages/subpage/kasir/KasirTransaksi";
 import './css/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const meta = {
@@ -51,7 +51,6 @@ const App = () => {
           <Route path='/kasir-transaksi' element={<KasirTransaksi/>}/>
           <Route path='/laporan-akhir' element={<LaporanAkhir/>}/>
           
-
           {/* Route ke repository */}
           <Route path="/pos-final/">
 
@@ -60,6 +59,7 @@ const App = () => {
             
             {/* Route ke halaman manager sesuai repository */}
             <Route path="mngr/" element={<Manager />} />
+            <Route path="ownr/" element={<Owner />} />
 
             {/* Route ke halaman dashboard */}
             <Route path="mngr/dashboard" element={<Manager />} />
