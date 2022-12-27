@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
+
 const NavigationBar = () => {
+    const navigate = useNavigate();
+    const logoutUser = () => {
+        localStorage.clear();
+        navigate("/")
+    }
+
     return(
         <>
             <div className="container navigation-bar m-0 p-3 mt-3 shadow">
@@ -38,7 +47,7 @@ const NavigationBar = () => {
                     >Karyawan</a>
                 </div>
                 <div className="list-group mb-3">
-                    <a 
+                    <a  onClick={logoutUser}
                         href="/pos-final/" 
                         className="list-group-item list-group-item-action mt-2 karyawan"
                     >Logout</a>

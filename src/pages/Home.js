@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
     const [kode, setKode] = useState('');
+    const [isLogin, setIsLogin] = useState('');
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (localStorage.getItem("datakasir")) {
-    //         navigate("/kasir-transaksi");
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (localStorage.getItem("datakasir")) {
+            navigate("/kasir-transaksi");
+        }
+    }, []);
 
     const LoginKasir = async (e) => {
         e.preventDefault();

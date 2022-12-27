@@ -15,6 +15,11 @@ const Manager = () => {
     const [dataJenis, setDataJenis] = useState();
     const navigate = useNavigate();
 
+    const logoutUser = () => {
+        localStorage.clear();
+        navigate("/")
+    }
+
     const checkUserToken = () => {
         if (!localStorage.getItem("datakasir")) {
             navigate("/");

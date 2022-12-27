@@ -21,6 +21,11 @@ const Owner = () => {
         }
     }
 
+    const logoutUser = () => {
+        localStorage.clear();
+        navigate("/")
+    }
+
     useEffect(() => {
         checkUserToken();
         axios
@@ -56,7 +61,7 @@ const Owner = () => {
                 <div className="container navigation-bar m-0 p-3 mt-3 shadow">
                     <h1 className="text-center mb-4" >P.O.S</h1>
                     <div className="list-group mb-3">
-                        <a href="/pos-final/" className="list-group-item text-center list-group-item-action mt-2 karyawan">Logout</a>
+                        <a href="/pos-final/" onClick={logoutUser} className="list-group-item text-center list-group-item-action mt-2 karyawan">Logout</a>
                     </div>
                 </div>
                 <div className="container m-3">

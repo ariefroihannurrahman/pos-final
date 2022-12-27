@@ -37,8 +37,7 @@ export const LaporanAkhir = () => {
             id_session: dataKasir.idsession,
             laporan_akhir: nominal
         });
-        localStorage.clear();
-        navigate("/")
+        
     }
 
     return (
