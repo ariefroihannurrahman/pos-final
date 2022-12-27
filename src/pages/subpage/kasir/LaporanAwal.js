@@ -22,8 +22,15 @@ export const LaporanAwal = () => {
         } catch (error) { }
     };
 
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
+
     useEffect(() => {
         getDataKasir();
+        checkUserToken();
     }, []);
 
     const SaveLaporanAwal = async (e) => {

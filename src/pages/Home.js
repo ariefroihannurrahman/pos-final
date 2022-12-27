@@ -24,7 +24,8 @@ export const Home = () => {
             const dataLogin = {
                 idsession: res.data.sessionid,
                 idkasir: res.data.idkasir,
-                namakasir: res.data.namakasir
+                namakasir: res.data.namakasir,
+                jabatan : res.data.jabatan
             };
             localStorage.setItem("datakasir", JSON.stringify(dataLogin));
             if(res.data.jabatan == "Kasir"){

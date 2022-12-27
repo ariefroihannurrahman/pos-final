@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Title from "../../../components/Title";
+import { useNavigate } from "react-router-dom";
 
 const Owner = () => {
     const serverHost = "http://localhost:5000/";
     const [dataPenjualan, setDataPenjualan] = useState();
     const [dataKaryawan, setDataKaryawan] = useState();
+    const navigate = useNavigate();
 
     const cekKaryawan = (params) => {
         for (let i = 0; i < dataKaryawan.length; i++) {
@@ -13,7 +15,14 @@ const Owner = () => {
         }
     }
 
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
+
     useEffect(() => {
+        checkUserToken();
         axios
             .get(serverHost + 'API/transaksi')
             .then(

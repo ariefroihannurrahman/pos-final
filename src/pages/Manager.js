@@ -4,6 +4,7 @@ import DocumentMeta from "react-document-meta";
 import {Helmet} from "react-helmet";
 import NavigationBar from "../components/NavigationBar";
 import Title from "../components/Title";
+import { useNavigate } from "react-router-dom";
 
 const Manager = () => {
     const serverHost = 'http://localhost:5000/';
@@ -12,8 +13,16 @@ const Manager = () => {
     const [dataPenjualan, setDataPenjualan] = useState();
     const [dataKategori, setDataKategori] = useState();
     const [dataJenis, setDataJenis] = useState();
+    const navigate = useNavigate();
+
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
 
     useEffect(() => {
+        checkUserToken();
         axios
             .get(serverHost + 'API/karyawan')
             .then(

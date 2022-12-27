@@ -21,6 +21,8 @@ export const KasirUtama = () => {
     const [bayar, setBayar] = useState(0);
     const [kembalian, setKembalian] = useState(0);
 
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -41,6 +43,12 @@ export const KasirUtama = () => {
         console.log(res.data)
     }
 
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
+
     const GetKode = (e) => {
         setKode(e.target.value);
         setShow(false);
@@ -49,6 +57,7 @@ export const KasirUtama = () => {
 
     useEffect(() => {
         getDataKasir();
+        checkUserToken();
         GetAllProduk();
         setIdTransaksi(idDate);
     }, []);

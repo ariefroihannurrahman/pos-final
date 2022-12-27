@@ -19,9 +19,16 @@ export const LaporanAkhir = () => {
         setDataLaporan(JSON.parse(data));
     };
 
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
+
     useEffect(() => {
         getDataKasir();
         getDataLaporan();
+        checkUserToken();
     }, []);
 
     const SaveLaporanAkhir = async (e) => {
