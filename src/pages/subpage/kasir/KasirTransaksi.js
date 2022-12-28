@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import $ from 'jquery';
 
 export const KasirUtama = () => {
 
@@ -41,6 +41,16 @@ export const KasirUtama = () => {
         const res = await axios.get('http://localhost:5000/get-all-item')
         setItemList(res.data)
         console.log(res.data)
+    }
+
+    const filterBarang = () => {
+        $("#filterSearch").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            console.log(value);
+            $("#tablebarang tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
     }
 
     const checkUserToken = () => {
@@ -120,13 +130,18 @@ export const KasirUtama = () => {
         if (bayar < total) {
             alert("Uang Kurang")
         } else {
-            const res = await axios.post('http://localhost:5000/save-transaksi', {
+            axios.post('http://localhost:5000/save-transaksi', {
                 id_transaksi: idtransaksi,
                 id_karyawan: dataKasir.idkasir,
                 tanggal_penjualan: toDate,
                 total_transaksi: total,
                 bayar: bayar
-            });
+            }).then(function (response) {
+                if(response.data == true){
+                        navigate("/");
+                        alert(true);
+                    }
+              })
         }
     }
 
@@ -217,7 +232,7 @@ export const KasirUtama = () => {
             <div className="row">
                 <div className="col mt-5">
                     <a href='/laporan-akhir' className="btn btn-primary float-start" >Logout</a>
-                    <a href='/kasir-transaksi' onClick={SaveTransaksi}><button type="button" id="selesai-transaksi" className="btn btn-primary float-end">Selesai</button></a>
+                    <a onClick={SaveTransaksi}><button type="button" id="selesai-transaksi" className="btn btn-primary float-end">Selesai</button></a>
                 </div>
             </div>
 
@@ -227,21 +242,24 @@ export const KasirUtama = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className='container'>
+                        <input type="text" className="form-control" id="filterSearch" onChange={filterBarang} />
                         <div className="row">
                             <div className="col mt-5 mb-5">
                                 <table className="table text-center">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">No.</th>
-                                            <th scope="col">Kode Barang</th>
-                                            <th scope="col">Nama Barang</th>
-                                            <th scope="col">Harga</th>
-                                            <th scope="col">Jenis</th>
-                                            <th scope="col">Kategori</th>
-                                            <th scope="col">Aksi</th>
-                                        </tr>
+                                        
+                                            <tr>
+                                                <th scope="col">No.</th>
+                                                <th scope="col">Kode Barang</th>
+                                                <th scope="col">Nama Barang</th>
+                                                <th scope="col">Harga</th>
+                                                <th scope="col">Jenis</th>
+                                                <th scope="col">Kategori</th>
+                                                <th scope="col">Aksi</th>
+                                            </tr>
+                                        
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tablebarang">
                                         {itemList.map((Item, index) => {
                                             return (
                                                 <tr key={Item.no_produk}>
