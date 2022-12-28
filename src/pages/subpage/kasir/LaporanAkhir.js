@@ -37,7 +37,8 @@ export const LaporanAkhir = () => {
             id_session: dataKasir.idsession,
             laporan_akhir: nominal
         });
-        
+        localStorage.clear();
+        navigate("/")
     }
 
     return (
@@ -48,7 +49,7 @@ export const LaporanAkhir = () => {
                     <div className="col-4 offset-4 mt-150px">
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="laporan_awal">Laporan Awal</label>
-                            <input type="text" id="laporan-awal" value={dataLaporan.laporanawal} className="form-control" />
+                            <input type="text" id="laporan-awal" value={dataLaporan.laporanawal} className="form-control" disabled/>
                         </div>
                         <div className="form-outline mb-4">
                             <label className="form-label" htmlFor="laporan_akhir">Laporan Akhir</label>
