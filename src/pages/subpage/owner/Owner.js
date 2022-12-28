@@ -9,23 +9,6 @@ const Owner = () => {
     const [dataKaryawan, setDataKaryawan] = useState();
     const navigate = useNavigate();
 
-    const cekKaryawan = (params) => {
-        for (let i = 0; i < dataKaryawan.length; i++) {
-            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan;
-        }
-    }
-
-    const checkUserToken = () => {
-        if (!localStorage.getItem("datakasir")) {
-            navigate("/");
-        }
-    }
-
-    const logoutUser = () => {
-        localStorage.clear();
-        navigate("/")
-    }
-
     useEffect(() => {
         checkUserToken();
         axios
@@ -55,6 +38,23 @@ const Owner = () => {
                 }
             )
     }, [])
+    
+    const cekKaryawan = (params) => {
+        for (let i = 0; i < dataKaryawan.length; i++) {
+            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan;
+        }
+    }
+
+    const checkUserToken = () => {
+        if (!localStorage.getItem("datakasir")) {
+            navigate("/");
+        }
+    }
+
+    const logoutUser = () => {
+        localStorage.clear();
+        navigate("/")
+    }
 
     return(
             <div className="d-flex flex-row">

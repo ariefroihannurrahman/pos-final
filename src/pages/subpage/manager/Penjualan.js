@@ -84,12 +84,13 @@ const Penjualan = () => {
                                 </thead>
                                 <tbody>
                                     {dataPenjualan && dataPenjualan.map((penjualan, index)=>{
+                                        const date = new Date(penjualan.tanggal_penjualan);
                                         return(
                                             <tr key={index}>
                                                 <td>{index+1}</td>
                                                 <td>{penjualan.no_transaksi}</td>
                                                 <td>{dataKaryawan && cekKaryawan(penjualan.no_karyawan)}</td>
-                                                <td>{penjualan.tanggal_penjualan}</td>
+                                                <td>{date.toLocaleDateString("id-ID").split("T")[0]}</td>
                                                 <td>{penjualan.total_transaksi}</td>
                                             </tr>
                                         );

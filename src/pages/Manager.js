@@ -95,6 +95,12 @@ const Manager = () => {
             );
     }, [])
     
+    const cekKaryawan = (params) => {
+        for (let i = 0; i < dataKaryawan.length; i++) {
+            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan
+        }
+    }
+
     const cekJenis = (params) => {
         for (let i = 0; i < dataJenis.length; i++) {
             console.log(dataJenis[i].no_jenis);
@@ -106,12 +112,6 @@ const Manager = () => {
         for (let i = 0; i < dataKategori.length; i++) {
             console.log(dataJenis[i].no_kategori);
             if(dataKategori[i].no_kategori === params) return dataKategori[i].nama_kategori;
-        }
-    }
-
-    const cekKaryawan = (params) => {
-        for (let i = 0; i < dataKaryawan.length; i++) {
-            if(dataKaryawan[i].no_karyawan === params) return dataKaryawan[i].nama_karyawan
         }
     }
     
@@ -156,12 +156,13 @@ const Manager = () => {
                                 </thead>
                                 <tbody>
                                     {dataPenjualan && dataPenjualan.map((penjualan, index)=>{
+                                        const date = new Date(penjualan.tanggal_penjualan);
                                         return(
                                             <tr key={index}>
                                                 <td>{index+1}</td>
                                                 <td>{penjualan.no_transaksi}</td>
                                                 <td>{dataKaryawan && cekKaryawan(penjualan.no_karyawan)}</td>
-                                                <td>{penjualan.tanggal_penjualan}</td>
+                                                <td>{date.toLocaleDateString("id-ID").split("T")[0]}</td>
                                                 <td>{penjualan.total_transaksi}</td>
                                             </tr>
                                         );
