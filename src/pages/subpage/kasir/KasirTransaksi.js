@@ -21,8 +21,6 @@ export const KasirUtama = () => {
     const [bayar, setBayar] = useState(0);
     const [kembalian, setKembalian] = useState(0);
 
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -46,7 +44,6 @@ export const KasirUtama = () => {
     const filterBarang = () => {
         $("#filterSearch").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            console.log(value);
             $("#tablebarang tr").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
@@ -139,7 +136,6 @@ export const KasirUtama = () => {
             }).then(function (response) {
                 if(response.data == true){
                         navigate("/");
-                        alert(true);
                     }
               })
         }
